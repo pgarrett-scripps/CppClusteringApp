@@ -7,11 +7,14 @@ import plotly.express as px
 # set random seed
 random_seed = 42
 
+empty = st.empty()
+
 with st.sidebar:
+    st.title("KMeans Clustering")
     csv_file = st.file_uploader("Upload a CSV file", type=['csv'])
 
     if csv_file is None:
-        st.warning("No file uploaded")
+        empty.info("Please upload a CSV file")
         st.stop()
 
     df = pd.read_csv(csv_file)
@@ -31,8 +34,6 @@ kmeans = KMeans(n_clusters=kmeans, random_state=random_seed)
 clusters = kmeans.fit_predict(data)
 df['cluster'] = clusters
 
-
-st.title("KMeans Clustering Analysis")
 
 st.subheader("Clusters in PCA space")
 st.caption("Use the 'Pan' Option to select single data points. Use the 'Box Select' and 'Lasso Select' options to "
