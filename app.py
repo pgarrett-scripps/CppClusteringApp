@@ -32,9 +32,11 @@ clusters = kmeans.fit_predict(data)
 df['cluster'] = clusters
 
 
-st.subheader("Selected Data")
-st.caption("Click and drag to select data points on the plot to view the data")
+st.title("KMeans Clustering Analysis")
 
+st.subheader("Clusters in PCA space")
+st.caption("Use the 'Pan' Option to select single data points. Use the 'Box Select' and 'Lasso Select' options to "
+           "select multiple data points")
 if n_components == 2:
     pcas = PCA(n_components=n_components).fit_transform(data)
     df['pca1'] = pcas[:, 0]
@@ -60,8 +62,7 @@ elif n_components == 3:
 
 #st.dataframe(df)
 #event
-
-
+st.subheader("Selected data points")
 if event["selection"]["point_indices"]:
     selected_data = df.iloc[event["selection"]["point_indices"]]
     st.write(selected_data)
